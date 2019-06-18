@@ -20,12 +20,10 @@
 	</tr>
 	<?php
 		require_once('dbConnect.php');
-		$sql = "SELECT * FROM dbo.dataBarang"; 
-		//result 
-		$result = mysqli_query($con,$sql); 
+		$sql = "select * from dbo.dataBarang"; 
+		$result = $con->query($sql);
 
 		if ($result->num_rows > 0) {
-		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		        echo '<tr><td>' . $row["idBarang"]. '</td><td>' . $row["namaBarang"]. '</td><td>' . $row["jenisBarang"]. '</td><td>'. $row["jumlahBarang"].'</td></tr>';
 		    }
