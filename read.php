@@ -6,10 +6,31 @@
 	      window.location.href = "index.php";
 	    }      
 	</script> 
+	<link rel="icon" href="dasprologo.png">
+	<style type="text/css">
+		body {
+		    margin: 0;
+		    padding: 0;
+		}
+		h1 {
+		    color : #000000;
+		    text-align : center;
+		    font-family: "SIMPSON";
+		}
+		form {
+		    width: 300px;
+		    margin: 0 auto;
+		}
+		table {
+		    width: 50%;
+		    margin-left: auto;
+		    margin-right: auto;
+		}
+	</style>
 </head>
 
-<body>
-<button type="button" onclick="pageRedirect()">Back</button>
+<body align="center">
+<img src="dasprologo.jpg" alt="Daspro Logo" width="600" height="150">
 <h1 align="left">Data Logistik Daspro Laboratory</h1>
 <table border="1" cellpadding="8">
 	<tr>
@@ -22,25 +43,23 @@
 		try {
 			require_once('dbConnect.php');
 			$sql = "select * from dbo.dataBarang"; 
-			$result = $con->query($sql);
-			$registrants = $result->fetchAll();
+			$rs = $con->query($sql);
+			$result = $rs->fetchAll();
 
-            if(count($registrants) > 0) {
-                foreach($registrants as $registrant) {
-                    echo "<tr><td>".$registrant['idBarang']."</td>";
-                    echo "<td>".$registrant['namaBarang']."</td>";
-                    echo "<td>".$registrant['jenisBarang']."</td>";
-                    echo "<td>".$registrant['jumlahBarang']."</td></tr>";
+            if(count($result) > 0) {
+                foreach($result as $goods) {
+                    echo "<tr><td>".$goods['idBarang']."</td><td>".$goods['namaBarang']."</td><td>".$goods['jenisBarang']."</td><td>".$goods['jumlahBarang']."</td></tr>";
                 }
             } else {
 			    echo '<tr><td colspan="4" align="center">0 results</td></tr>';
 			}
 			mysqli_close($con);
 		} catch(Exception $e) {
-	        echo "Failed: " . $e;
+	        echo "Error : " . $e;
 	    }
 	?>
 </table>
+<button type="button" onclick="pageRedirect()">Back</button>
 </body>
 </html>
 

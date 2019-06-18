@@ -6,11 +6,28 @@
 	      window.location.href = "read.php";
 	    }      
 	</script> 
+	<link rel="icon" href="dasprologo.png">
+	<style type="text/css">
+		body {
+		    margin: 0;
+		    padding: 0;
+		}
+		h1 {
+		    color : #000000;
+		    text-align : center;
+		    font-family: "SIMPSON";
+		}
+		form {
+		    width: 300px;
+		    margin: 0 auto;
+		}
+	</style>
 </head>
 
-<body>
+<body align="center">
+<img src="dasprologo.jpg" alt="Daspro Logo" width="600" height="150">
 <h1 align="left">Insert Data Logistik Daspro Laboratory</h1>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data" align="center">
 	<table cellpadding="5px">
 		<tr>
 			<td>Nama Barang</td>
@@ -32,25 +49,25 @@
 </form>
 </body>
 </html>
+
 <?php
-require_once('dbConnect.php'); 
-if(isset($_POST["daftar"])){
-	try {
+try {
+	require_once('dbConnect.php'); 
+	if(isset($_POST["daftar"])){		
 		if (empty($nama)||empty($jenis)||empty($jumlah)){
 			echo "<script>alert('anda harus mengisi data dengan lengkap.');location.href='index.php';</script>";
 		} else {
 			$sql = "INSERT INTO dbo.dataBarang (namaBarang, jenisBarang, jumlahBarang) VALUES ('$nama','$jenis',$jumlah)";
-			$stmt = $con->prepare($sql);
-			if($stmt->execute()){
+			$statement = $con->prepare($sql);
+			if($statement->execute()){
 				echo '<script>window.alert("Data berhasil ditambahkan");location.href="read.php";</script>';
 			}else{ 
-			echo '<script>window.alert("Data gagal ditambahkan");location.href="index.php";</script>'; 
+				echo '<script>window.alert("Data gagal ditambahkan");location.href="index.php";</script>'; 
 			}
-			mysqli_close($con);
 		}
-	} catch(Exception $e) {
-        echo "Failed: " . $e;
-    }
+	}
+} catch(Exception $e) {
+        echo "Error : " . $e;
 }
 
 ?>
