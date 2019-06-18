@@ -35,17 +35,22 @@
 <?php
 require_once('dbConnect.php'); 
 if(isset($_POST["daftar"])){
-	if (empty($nama)||empty($jenis)||empty($jumlah)){
-		echo "<script>alert('anda harus mengisi data dengan lengkap.');location.href='index.php';</script>";
-	} else {
-		$sql = "INSERT INTO dbo.dataBarang (namaBarang, jenisBarang, jumlahBarang) VALUES ('$nama','$jenis','$jumlah')";
-		if(mysqli_query($con,$sql)){
-			echo '<script>window.alert("Data berhasil ditambahkan");location.href="read.php";</script>';
-		}else{ 
-		echo '<script>window.alert("Data gagal ditambahkan");location.href="index.php";</script>'; 
+	try {
+		if (empty($nama)||empty($jenis)||empty($jumlah)){
+			echo "<script>alert('anda harus mengisi data dengan lengkap.');location.href='index.php';</script>";
+		} else {
+			$sql = "INSERT INTO dbo.dataBarang (namaBarang, jenisBarang, jumlahBarang) VALUES ('$nama','$jenis',$jumlah)";
+			$stmt = $con->prepare($sql);
+			if($stmt->execute()){
+				echo '<script>window.alert("Data berhasil ditambahkan");location.href="read.php";</script>';
+			}else{ 
+			echo '<script>window.alert("Data gagal ditambahkan");location.href="index.php";</script>'; 
+			}
+			mysqli_close($con);
 		}
-		mysqli_close($con);
-	}
+	} catch(Exception $e) {
+        echo "Failed: " . $e;
+    }
 }
 
 ?>
