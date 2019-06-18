@@ -24,6 +24,25 @@
 			$sql = "select * from dbo.dataBarang"; 
 			$result = $con->query($sql);
 
+			$registrants = $result->fetchAll(); 
+            if(count($registrants) > 0) {
+                // echo "<h2>People who are registered:</h2>";
+                // echo "<table>";
+                // echo "<tr><th>Name</th>";
+                // echo "<th>Email</th>";
+                // echo "<th>Job</th>";
+                // echo "<th>Date</th></tr>";
+                foreach($registrants as $registrant) {
+                    echo "<tr><td>".$registrant['idBarang']."</td>";
+                    echo "<td>".$registrant['namaBarang']."</td>";
+                    echo "<td>".$registrant['jenisBarang']."</td>";
+                    echo "<td>".$registrant['jumlahBarang']."</td></tr>";
+                }
+                // echo "</table>";
+            } else {
+                echo "<h3>No one is currently registered.</h3>";
+            }
+
 			if ($result->num_rows > 0) {
 			    while($row = $result->fetch_assoc()) {
 			        echo '<tr><td>' . $row["idBarang"]. '</td><td>' . $row["namaBarang"]. '</td><td>' . $row["jenisBarang"]. '</td><td>'. $row["jumlahBarang"].'</td></tr>';
