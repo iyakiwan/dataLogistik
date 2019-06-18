@@ -3,7 +3,7 @@
 	<title>Data Logistik Daspro Laboratory</title>
 	<script type="text/javascript">
 	    function pageRedirect() {
-	      window.location.href = "insert.php";
+	      window.location.href = "index.php";
 	    }      
 	</script> 
 </head>
@@ -20,7 +20,7 @@
 	</tr>
 	<?php
 		require_once('dbConnect.php');
-		$sql = "SELECT * FROM barang"; 
+		$sql = "SELECT * FROM dbo.dataBarang"; 
 		//result 
 		$result = mysqli_query($con,$sql); 
 
