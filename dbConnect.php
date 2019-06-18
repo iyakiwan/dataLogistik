@@ -1,6 +1,5 @@
 <?php
-define('HOST','dasprolaboratory.database.windows.net'); 
-define('USER','mufti'); 
-define('PASS','qwert12345@'); 
-define('DB','bljrAzure'); 
-$con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect'); ?>
+$connectionInfo = array("UID" => "mufti@dasprolaboratory", "pwd" => "qwert12345@", "Database" => "bljrAzure", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$serverName = "tcp:dasprolaboratory.database.windows.net,1433";
+$con = sqlsrv_connect($serverName, $connectionInfo);
+?>
