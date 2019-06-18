@@ -36,7 +36,7 @@
 require_once('dbConnect.php'); 
 if(isset($_POST["daftar"])){
 	if (empty($nama)||empty($jenis)||empty($jumlah)){
-		echo "<script>alert('anda harus mengisi data dengan lengkap.');location.href='insert.php';</script>";
+		echo "<script>alert('anda harus mengisi data dengan lengkap.');location.href='index.php';</script>";
 	} else {
 		$sql = "INSERT INTO dbo.dataBarang (namaBarang, jenisBarang, jumlahBarang) VALUES ('$nama','$jenis','$jumlah')";
 		if(mysqli_query($con,$sql)){

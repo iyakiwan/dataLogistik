@@ -19,18 +19,22 @@
 		<th>Jumlah Barang</th>
 	</tr>
 	<?php
-		require_once('dbConnect.php');
-		$sql = "select * from dbo.dataBarang"; 
-		$result = $con->query($sql);
+		try {
+			require_once('dbConnect.php');
+			$sql = "select * from dbo.dataBarang"; 
+			$result = $con->query($sql);
 
-		if ($result->num_rows > 0) {
-		    while($row = $result->fetch_assoc()) {
-		        echo '<tr><td>' . $row["idBarang"]. '</td><td>' . $row["namaBarang"]. '</td><td>' . $row["jenisBarang"]. '</td><td>'. $row["jumlahBarang"].'</td></tr>';
-		    }
-		} else {
-		    echo '<tr><td colspan="4" align="center">0 results</td></tr>';
-		}
-		mysqli_close($con);
+			if ($result->num_rows > 0) {
+			    while($row = $result->fetch_assoc()) {
+			        echo '<tr><td>' . $row["idBarang"]. '</td><td>' . $row["namaBarang"]. '</td><td>' . $row["jenisBarang"]. '</td><td>'. $row["jumlahBarang"].'</td></tr>';
+			    }
+			} else {
+			    echo '<tr><td colspan="4" align="center">0 results</td></tr>';
+			}
+			mysqli_close($con);
+		} catch(Exception $e) {
+	        echo "Failed: " . $e;
+	    }
 	?>
 </table>
 </body>
